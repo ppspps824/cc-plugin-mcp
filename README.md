@@ -1,68 +1,97 @@
 # cc-plugin-mcp
 
-Claude CodeプラグインにREST API経由でアクセスするためのサーバーです。
+MCP (Model Context Protocol) server for accessing Claude Code plugins.
 
-## 概要
+## Overview
 
-Claude Codeのプラグインシステムとのインタフェースを提供し、プラグイン一覧の取得や詳細情報の参照を可能にします。
+This MCP server provides an interface to Claude Code's plugin system via the Model Context Protocol, enabling you to retrieve plugin lists and detailed information. It can be used from MCP clients such as Claude Desktop, Cursor, etc.
 
-## 主な機能
+## Key Features
 
-- **セキュリティ**: パストトラバーサル対策、入力検証、エラーハンドリング
-- **パフォーマンス**: LRUキャッシュによる高速化
-- **運用性**: 包括的なロギング、29個のテストケース
+- **MCP Protocol Support**: Compliant with Model Context Protocol
+- **Plugin Management**: Retrieve plugin lists and load elements from Claude Code plugins
+- **Security**: Path traversal protection, input validation, error handling
+- **Performance**: LRU cache for fast access
+- **Operability**: Comprehensive logging, 29 test cases
 
-## API エンドポイント
+## MCP Tools
 
-- `GET /health` - ヘルスチェック
-- `GET /plugins` - プラグイン一覧取得
-- `POST /plugins/{plugin_name}/load-elements` - プラグイン要素読み込み
+- `get-plugin-list` - Get a list of available plugins
+- `load-elements` - Load elements (skills, agents, commands) from specified plugins
 
-詳細は [API ドキュメント](http://127.0.0.1:8000/docs) を参照してください。
+## Configuration
 
-## インストール
+Add the following to your MCP client configuration file (e.g., `claude_desktop_config.json` for Claude Desktop):
+
+```json
+{
+  "mcpServers": {
+    "cc-plugin-mcp": {
+      "command": "uvx",
+      "args": ["cc-plugin-mcp"]
+    }
+  }
+}
+```
+
+## Installation
 
 ```bash
-# 依存関係のインストール
-uv sync
+# Run directly with uvx (recommended)
+uvx cc-plugin-mcp
 
-# 開発環境の場合
+# Or install from PyPI
+pip install cc-plugin-mcp
+
+# For development
+git clone https://github.com/ppspps824/cc-plugin-mcp.git
+cd cc-plugin-mcp
 uv sync --all-extras
 ```
 
-## 使い方
+## Usage
+
+This runs as an MCP server and is called directly by MCP clients. For manual testing:
 
 ```bash
-# サーバー起動
-uv run python -m cc_plugin_mcp.main
+# Start MCP server with uvx (recommended)
+uvx cc-plugin-mcp
 
-# API ドキュメント
-# Swagger UI: http://127.0.0.1:8000/docs
-# ReDoc: http://127.0.0.1:8000/redoc
+# Or for development
+uv run python -m cc_plugin_mcp.main
 ```
 
-## テスト
+## Testing
 
 ```bash
-# テスト実行
+# Run tests
 uv run pytest
 
-# カバレッジ付き
+# With coverage
 uv run pytest --cov=cc_plugin_mcp
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-### プラグインが見つからない場合
-1. `~/.claude/plugins/` ディレクトリの存在確認
-2. `~/.claude/plugins/marketplaces/` に marketplace.json があるか確認
+### Plugins not found
+1. Check if `~/.claude/plugins/` directory exists
+2. Verify `marketplace.json` exists in `~/.claude/plugins/marketplaces/`
 
-### テストが失敗する場合
+### MCP client doesn't recognize the server
+1. Verify MCP client configuration file is set up correctly
+2. Check if `uvx` command is available (`uvx --version`)
+3. Check MCP client logs for error messages
+
+### Tests failing
 ```bash
 uv sync --all-extras --refresh
 uv run pytest -v
 ```
 
-## ライセンス
+## License
 
 MIT
+
+## Repository
+
+https://github.com/ppspps824/cc-plugin-mcp

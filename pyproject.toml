@@ -1,12 +1,13 @@
 [project]
 name = "cc-plugin-mcp"
-version = "0.1.0"
+version = "0.1.4"
 description = "Claude Code Plugin MCP - Access Claude Code plugins via MCP protocol"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
     {name = "papasim824", email = "papasim824@gmail.com"}
 ]
+
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115.0",
@@ -15,6 +16,11 @@ dependencies = [
     "pydantic-settings>=2.0.0",
     "fastmcp>=0.1.0",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/ppspps824/cc-plugin-mcp"
+"Repository" = "https://github.com/ppspps824/cc-plugin-mcp"
+"Bug Tracker" = "https://github.com/ppspps824/cc-plugin-mcp/issues"
 
 [project.optional-dependencies]
 dev = [
