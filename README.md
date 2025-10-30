@@ -16,8 +16,8 @@ This MCP server provides an interface to Claude Code's plugin system via the Mod
 
 ## MCP Tools
 
-- `get-plugin-list` - Get a list of available plugins
-- `load-elements` - Load elements (skills, agents, commands) from specified plugins
+- `list_plugins` - Get a list of available plugins
+- `load_elements` - Load elements (skills, agents, commands) from specified plugins
 
 ## Configuration
 
@@ -60,6 +60,25 @@ uvx cc-plugin-mcp
 # Or for development
 uv run python -m cc_plugin_mcp.main
 ```
+
+## MCP Integration with AI Tools
+
+For optimal use of this MCP server with AI tools like Cursor, Claude Desktop, or other MCP-compatible clients:
+
+### With Cursor
+1. Add the MCP server to your Cursor settings (`.cursor/settings.json` or similar)
+2. Include the configuration shown in the Configuration section above
+3. **Important**: Make sure to load the MCP server tools in your system prompt or initial message. Tell the AI to use the available MCP tools by instructing it to first call the MCP tools list to discover what's available.
+
+### With Claude Desktop
+1. Add the configuration to `claude_desktop_config.json` as shown in the Configuration section
+2. Restart Claude Desktop to enable the MCP server
+3. The MCP tools will be automatically available for Claude to use
+
+### Best Practices for Using MCP Tools
+- **Load the tools first**: Always instruct the AI to first call the available MCP tools to discover what's available
+- **Check the system prompt**: Ensure your system prompt or initial instructions include guidance to use MCP tools
+- **Discover capabilities**: Use the tools to explore available plugins and their elements before requesting specific functionality
 
 ## Testing
 

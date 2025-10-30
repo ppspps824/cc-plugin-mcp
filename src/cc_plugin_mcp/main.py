@@ -146,7 +146,7 @@ route_maps = [
 
 # Initialize FastMCP with custom route mappings
 # Server name is shortened to "cc-plugin-mcp"
-# Tools are named via operation_id: "list" and "load"
+# Tools are named via operation_id: "list_plugins" and "load_elements"
 mcp = FastMCP.from_fastapi(
     app=app,
     name="cc-plugin-mcp",

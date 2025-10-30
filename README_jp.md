@@ -16,8 +16,8 @@ Claude CodeのプラグインシステムとのインタフェースをMCPプロ
 
 ## MCP ツール
 
-- `get-plugin-list` - 利用可能なプラグインの一覧を取得
-- `load-elements` - 指定されたプラグインの要素（skills, agents, commands）を読み込み
+- `list_plugins` - 利用可能なプラグインの一覧を取得
+- `load_elements` - 指定されたプラグインの要素（skills, agents, commands）を読み込み
 
 ## 設定方法
 
@@ -60,6 +60,25 @@ uvx cc-plugin-mcp
 # または開発環境の場合
 uv run python -m cc_plugin_mcp.main
 ```
+
+## AI ツールとの MCP 統合
+
+Cursor、Claude Desktop など MCP 対応の AI ツールで、このMCPサーバーを最適に活用するために：
+
+### Cursor での使用方法
+1. Cursor の設定（`.cursor/settings.json` など）に MCP サーバーを追加
+2. 上記の「設定方法」セクションで示された設定を含める
+3. **重要**: システムプロンプトまたは最初のメッセージで、AI に MCP ツールを使用するよう指示してください。特に、最初に利用可能な MCP ツールを読み込むように指示することが重要です。
+
+### Claude Desktop での使用方法
+1. 設定ファイル `claude_desktop_config.json` に設定を追加（上記「設定方法」セクション参照）
+2. Claude Desktop を再起動して MCP サーバーを有効化
+3. Claude がすぐに MCP ツールを利用できるようになります
+
+### MCP ツール使用時のベストプラクティス
+- **ツールを最初に読み込む**: AI に最初に利用可能な MCP ツールを確認するよう指示してください
+- **システムプロンプトを確認**: システムプロンプトまたは初期指示に MCP ツール使用ガイダンスが含まれていることを確認してください
+- **機能を発見**: 特定の機能をリクエストする前に、ツールを使ってプラグインとその要素を探索してください
 
 ## テスト
 
