@@ -1,6 +1,6 @@
 [project]
 name = "cc-plugin-mcp"
-version = "0.1.4"
+version = "0.1.5"
 description = "Claude Code Plugin MCP - Access Claude Code plugins via MCP protocol"
 readme = "README.md"
 license = {text = "MIT"}
